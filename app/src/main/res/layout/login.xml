@@ -1,0 +1,92 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/bg_login"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding = "10dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    tools:context=".login">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity= "center"
+        android:id="@+id/text1"
+        android:text="WELCOME BACK."
+        android:lines="2"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="40sp"/>
+    <EditText
+        android:id="@+id/et_un"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text1"
+        android:background="@color/white"
+        android:singleLine="true"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="text"
+        android:hint="Username"
+        android:textColorHint="@color/input_login_hint"
+        />
+
+    <EditText
+        android:id="@+id/et_pw"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/et_un"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:textColorHint="@color/input_login_hint"
+        />
+    <Button
+    android:id="@+id/btn_login"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/et_pw"
+    android:layout_alignParentLeft="true"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="#eaFF88"
+    android:text="Login" />
+
+    <!-- Bypass Login / For Testing -->
+    <Button
+        android:id="@+id/btn_bypassLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_login"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#eaeaaa"
+        android:text="Bypass Login" />
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="400dip"
+        android:layout_height="100dip"
+        android:textSize="7pt"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/btn_login"
+        android:layout_marginRight="9dip"
+        android:layout_marginTop="15dip"
+        android:layout_marginLeft="120dip"
+        android:textColor="#AA0000"
+        android:text=""/>
+</RelativeLayout>
