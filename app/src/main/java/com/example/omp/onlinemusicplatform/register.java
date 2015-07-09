@@ -115,7 +115,7 @@ public class register extends ActionBarActivity {
                 code = (json.getInt("code"));
                 if (code == 1) {
                     Log.i("msg", "Data Successfully Inserted");
-                    Toast.makeText(getApplicationContext(), "Data Successfully Inserted", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Data Successfully Inserted", Toast.LENGTH_SHORT).show();
 
 //Data Successfully Inserted
                 } else {
@@ -123,7 +123,7 @@ public class register extends ActionBarActivity {
                 }
             } catch (Exception e) {
                 Log.i("TAG", e.toString());
-                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
 
             }
             return null;
