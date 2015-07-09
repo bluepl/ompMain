@@ -22,7 +22,7 @@ import android.widget.TextView;
 public class login extends Activity {
     EditText un, pw;
     TextView error;
-    Button ok;
+    Button ok, btnReg;
     private String resp;
     private String errorMsg;
     private Dao Dao = new Dao();
@@ -36,7 +36,7 @@ public class login extends Activity {
         pw = (EditText) findViewById(R.id.et_pw);
         ok = (Button) findViewById(R.id.btn_login);
         error = (TextView) findViewById(R.id.tv_error);
-
+        btnReg = (Button)findViewById(R.id.btn_toReg);
         ok.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -77,7 +77,15 @@ public class login extends Activity {
                 }
             }
         });
+        btnReg.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+
+                Intent launchActivity = new Intent(getApplicationContext(), register.class);
+                startActivity(launchActivity);
+            }
+        });
     }
 
     public void sendMessage(View view) {
