@@ -1,14 +1,19 @@
 package com.example.omp.onlinemusicplatform;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -23,11 +28,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class InsertActivity extends Activity {
 
-    String uid_text = null;
-    String name_text = null;
-    String city_text = null;
+public class register extends ActionBarActivity {
 
     InputStream is = null;
 
@@ -35,32 +37,36 @@ public class InsertActivity extends Activity {
     String result = null;
     int code;
 
-    EditText uid = null;
-    EditText name = null;
-    EditText city = null;
-    Button submit = null;
+    EditText etUn = null;
+    EditText etPw = null;
+    EditText etMail = null;
+    Button btnRegister = null;
+
+    String un = null;
+    String pw = null;
+    String mail = null;
 
     Context context = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_insert);
+        setContentView(R.layout.activity_register);
 
         context = this;
 
-        uid = (EditText) findViewById(R.id.uid);
-        name = (EditText) findViewById(R.id.name);
-        city = (EditText) findViewById(R.id.city);
-        submit = (Button) findViewById(R.id.submit);
+        etUn = (EditText) findViewById(R.id.et_un);
+        etPw = (EditText) findViewById(R.id.et_pw);
+        etMail = (EditText) findViewById(R.id.et_mail);
+        btnRegister = (Button) findViewById(R.id.btn_register);
 
-        submit.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                uid_text = uid.getText().toString();
-                name_text = name.getText().toString();
-                city_text = city.getText().toString();
+                un = etUn.getText().toString();
+                pw = new String(Hex.encodeHex(DigestUtils.sha(etPw.getText().toString())));
+                mail = etMail.getText().toString();
                 new insertDATA().execute("");
             }
         });
@@ -73,13 +79,13 @@ public class InsertActivity extends Activity {
         protected String doInBackground(String... arg0) {
             ArrayList<NameValuePair> values = new ArrayList<NameValuePair>();
 
-            values.add(new BasicNameValuePair("uid", uid_text));
-            values.add(new BasicNameValuePair("name", name_text));
-            values.add(new BasicNameValuePair("city", city_text));
-
+            values.add(new BasicNameValuePair("name", un));
+            values.add(new BasicNameValuePair("pw", pw));
+            values.add(new BasicNameValuePair("email", mail));
+            values.add(new BasicNameValuePair("isActivated", "1"));
             try {
                 DefaultHttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://rifeinblu.com/AndroidFileUpload/insertDATA.php");
+                HttpPost httppost = new HttpPost("http://192.168.0.108/insertReg.php");
                 httppost.setEntity(new UrlEncodedFormEntity(values));
                 HttpResponse response = httpclient.execute(httppost);
                 HttpEntity entity = response.getEntity();
@@ -109,12 +115,16 @@ public class InsertActivity extends Activity {
                 code = (json.getInt("code"));
                 if (code == 1) {
                     Log.i("msg", "Data Successfully Inserted");
+                    Toast.makeText(getApplicationContext(), "Data Successfully Inserted", Toast.LENGTH_SHORT).show();
+
 //Data Successfully Inserted
                 } else {
 //Data Not Inserted
                 }
             } catch (Exception e) {
                 Log.i("TAG", e.toString());
+                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+
             }
             return null;
         }

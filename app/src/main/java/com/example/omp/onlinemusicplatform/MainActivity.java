@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
         dataList.add(new DrawerItem("New songs", R.drawable.ic_action_group));
         dataList.add(new DrawerItem("Record a song", R.drawable.ic_action_video));
         dataList.add(new DrawerItem("Upload a song", R.drawable.ic_action_import_export));
-        dataList.add(new DrawerItem("My Playlist", R.drawable.ic_action_import_export));
+        dataList.add(new DrawerItem("Songs", R.drawable.ic_action_import_export));
         dataList.add(new DrawerItem("Sleep Mode", R.drawable.ic_action_import_export));
         dataList.add(new DrawerItem("Setting", R.drawable.ic_action_import_export));
         dataList.add(new DrawerItem("Quit", R.drawable.ic_action_import_export));
@@ -114,11 +114,8 @@ public class MainActivity extends Activity {
                 break;
             //My Playlist
             case 3:
-                //fragment = new FragmentOne();
-                //args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
-                //        .getItemName());
-                //args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(position)
-                 //       .getImgResID());
+                i = new Intent(getApplicationContext(), AlbumsActivity.class);
+                startActivity(i);
                 break;
             //Sleep Mode
             case 4:
@@ -165,8 +162,14 @@ public class MainActivity extends Activity {
                 break;
             //Quit
             case 6:
+                Intent intent = new Intent(this, login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("Exit me", true);
+                startActivity(intent);
                 finish();
-                System.exit(0);
+
+                //finish();
+                //System.exit(0);
                 break;
 
         }

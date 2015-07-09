@@ -17,13 +17,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 @SuppressLint("NewApi")
 public class login extends Activity {
     EditText un, pw;
     TextView error;
-    Button login, bypassLogin;
+    Button ok;
     private String resp;
     private String errorMsg;
     private Dao Dao = new Dao();
@@ -35,11 +34,10 @@ public class login extends Activity {
         setContentView(R.layout.login);
         un = (EditText) findViewById(R.id.et_un);
         pw = (EditText) findViewById(R.id.et_pw);
-        login = (Button) findViewById(R.id.btn_login);
-        bypassLogin = (Button) findViewById(R.id.btn_bypassLogin);
+        ok = (Button) findViewById(R.id.btn_login);
         error = (TextView) findViewById(R.id.tv_error);
 
-        login.setOnClickListener(new View.OnClickListener() {
+        ok.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -52,14 +50,14 @@ public class login extends Activity {
                     if(Dao.CheckLogin(UserName,HashedPassword))
                     {
                         sendMessage(v);
-                //Login success -> redirect to the Main activity
-                //Intent launchActivity= new Intent(login.this,MainActivity.class);
-                //startActivity(launchActivity);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            errorMsg = e.getMessage();
-        }
+                        //Login success -> redirect to the Main activity
+                        //Intent launchActivity= new Intent(login.this,MainActivity.class);
+                        //startActivity(launchActivity);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    errorMsg = e.getMessage();
+                }
 
 
 
@@ -79,29 +77,11 @@ public class login extends Activity {
                 }
             }
         });
-        bypassLogin.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // Byspass Login -> redirect to the Main activity immediately
-
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-
-
-                Toast.makeText(getApplicationContext(), "Login Bypassed.", Toast.LENGTH_SHORT).show();
-                /*
-                    i.putExtra("file_desc", outputFile);
-                    i.putExtra("file_name", audName);
-                */
-                startActivity(i);
-
-            }
-        });
 
     }
 
     public void sendMessage(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-    }
+    };
 }

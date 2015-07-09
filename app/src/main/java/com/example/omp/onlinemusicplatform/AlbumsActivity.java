@@ -58,7 +58,7 @@ public class AlbumsActivity extends ListActivity {
     private static final String TAG_ID = "cid";
     private static final String TAG_NAME = "name";
     private static final String TAG_SONGS_COUNT = "cid";
-
+/*
     public void startPlayer(View view) {
         Intent intent = new Intent(this, MediaPlayerActivity.class);
         startActivity(intent);
@@ -68,7 +68,7 @@ public class AlbumsActivity extends ListActivity {
         Intent intent = new Intent(this, AudioCaptureActivity.class);
         startActivity(intent);
     }
-
+*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

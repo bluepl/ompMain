@@ -1,45 +1,76 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="omp.rifeinblu.com.ompmultilevellistviewnavigation.AudioCaptureActivity">
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Recording Point: -"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    android:background="#FF4081"
+    tools:context="com.example.omp.AudioCaptureActivity"
+    android:id="@+id/acLayout">
+   <RelativeLayout
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/pageHead"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentEnd="false"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentStart="false">
 
-    <ImageView
-        android:id="@+id/micImage"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/text1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:src="@android:drawable/presence_audio_online" />
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:paddingTop="30dp"
+           android:gravity= "center"
+           android:id="@+id/pageTitle"
+           android:text="RECORD"
+           android:lines="2"
+           android:textStyle="bold"
+           android:textColor="#ffffff"
+           android:fontFamily="Arial"
+           android:typeface="serif"
+           android:textSize="40sp" />
+       <!--
+       <TextView
+           android:id="@+id/text1"
+           android:layout_below="@+id/pageTitle"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:text="Recording Point: -"
+           android:textAppearance="?android:attr/textAppearanceMedium" />
+        -->
+       <ImageView
+           android:id="@+id/micImage"
+           android:layout_width="60dp"
+           android:layout_height="60dp"
+           android:layout_below="@+id/pageTitle"
+           android:layout_centerHorizontal="true"
+           android:layout_marginTop="40dp"
+           android:layout_marginBottom="40dp"
+           android:src="@drawable/ic_keyboard_voice_black_18dp" />
 
-    <LinearLayout  android:layout_width="match_parent"
+   </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/micImage"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/pageHead"
         android:id="@+id/linear1"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="upload" />
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <Button
             android:id="@+id/start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="start" />
+            android:layout_marginLeft="10dp"
+            android:text="start"
+            android:elevation="2dp" />
 
         <Button
             android:id="@+id/stop"
@@ -47,31 +78,47 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:enabled="false"
-            android:text="stop" />
+            android:text="stop"
+            android:elevation="2dp" />
 
     </LinearLayout>
 
     <LinearLayout  android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/linear1"
         android:id="@+id/linear2"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
 
-        <Button
-            android:id="@+id/play"
+        <ImageButton
+            android:id="@+id/imgPlayBtn"
+            android:src="@drawable/ic_play_arrow_black_18dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:text="play" />
+            android:text="play"
+            android:elevation="2dp"
+            android:clickable="false" />
 
-        <Button
-            android:id="@+id/stopPlay"
+        <ImageButton
+            android:id="@+id/imgPauseBtn"
+            android:src="@drawable/ic_stop_black_18dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:enabled="false"
             android:layout_marginLeft="10dp"
-            android:text="stop playing" />
+            android:text="stop"
+            android:elevation="2dp" />
     </LinearLayout>
+
+    <Button
+
+        android:id="@+id/upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="upload"
+        android:elevation="2dp" />
 
 </RelativeLayout>

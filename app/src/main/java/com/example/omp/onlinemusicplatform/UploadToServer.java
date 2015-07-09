@@ -94,7 +94,9 @@ public class UploadToServer extends Activity implements OnClickListener{
         upLoadServerUri = "http://rifeinblu.com/AndroidFileUpload/UploadToServer.php";
         //upLoadServerUri = "http://192.168.0.108/UploadToServer.php";
 
+
         update = (Button) findViewById(R.id.btn_updateDb);
+
 
 
         //uid = (EditText) findViewById(R.id.uid);

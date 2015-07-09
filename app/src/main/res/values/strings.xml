@@ -28,4 +28,7 @@
     <string name="title_activity_upload_to_server">UploadToServer</string>
     <string name="title_activity_audio_capture">AudioCaptureActivity</string>
     <string name="title_activity_insert">InsertActivity</string>
+    <string name="title_activity_register">register</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

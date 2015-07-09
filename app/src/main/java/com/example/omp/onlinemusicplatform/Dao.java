@@ -43,10 +43,15 @@ public class Dao {
                     ResultSet rs = statement.executeQuery(sql);
                     if (rs.next()) {
                         return 1;
+
                         //result[0] = true;
                         //latch.countDown();
                         //Toast.makeText(getApplicationContext(), rs.getString("name"), Toast.LENGTH_LONG).show();
                     }
+                    if(conn!=null)
+                        conn.close();
+                    if(rs!=null)
+                        rs.close();
                 }
                 catch (SQLException e)
                 {
@@ -57,6 +62,7 @@ public class Dao {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+
                 return 0;
             }
         };

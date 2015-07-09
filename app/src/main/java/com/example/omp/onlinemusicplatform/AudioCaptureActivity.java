@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +24,9 @@ public class AudioCaptureActivity extends ActionBarActivity {
         private Button uploadBtn;
         private Button startBtn;
         private Button stopBtn;
-        private Button playBtn;
-        private Button stopPlayBtn;
-        private TextView text;
+        private ImageButton playBtn;
+        private ImageButton stopPlayBtn;
+        //private TextView text;
         int randName;
         String audName;
         @Override
@@ -34,7 +35,7 @@ public class AudioCaptureActivity extends ActionBarActivity {
             setContentView(R.layout.activity_audio_capture);
 
             randName = genRand();
-            text = (TextView) findViewById(R.id.text1);
+            //text = (TextView) findViewById(R.id.pageTitle);
             audName = "/aud_" + randName + ".3gpp" ;
             // store it to sd card
             outputFile = Environment.getExternalStorageDirectory().
@@ -85,7 +86,7 @@ public class AudioCaptureActivity extends ActionBarActivity {
                 }
             });
 
-            playBtn = (Button)findViewById(R.id.play);
+            playBtn = (ImageButton)findViewById(R.id.imgPlayBtn);
             playBtn.setOnClickListener(new OnClickListener() {
 
                 @Override
@@ -95,7 +96,7 @@ public class AudioCaptureActivity extends ActionBarActivity {
                 }
             });
 
-            stopPlayBtn = (Button)findViewById(R.id.stopPlay);
+            stopPlayBtn = (ImageButton)findViewById(R.id.imgPauseBtn);
             stopPlayBtn.setOnClickListener(new OnClickListener() {
 
                 @Override
@@ -119,7 +120,7 @@ public class AudioCaptureActivity extends ActionBarActivity {
                 e.printStackTrace();
             }
 
-            text.setText("Recording Point: Recording");
+            //text.setText("Recording Point: Recording");
             startBtn.setEnabled(false);
             stopBtn.setEnabled(true);
 
@@ -135,7 +136,7 @@ public class AudioCaptureActivity extends ActionBarActivity {
 
                 stopBtn.setEnabled(false);
                 playBtn.setEnabled(true);
-                text.setText("Recording Point: Stop recording");
+                //text.setText("Recording Point: Stop recording");
 
                 Toast.makeText(getApplicationContext(), "Stop recording...",
                         Toast.LENGTH_SHORT).show();
@@ -157,7 +158,7 @@ public class AudioCaptureActivity extends ActionBarActivity {
 
                 playBtn.setEnabled(false);
                 stopPlayBtn.setEnabled(true);
-                text.setText("Recording Point: Playing");
+                //text.setText("Recording Point: Playing");
 
                 Toast.makeText(getApplicationContext(), "Start play the recording...",
                         Toast.LENGTH_SHORT).show();
@@ -175,7 +176,7 @@ public class AudioCaptureActivity extends ActionBarActivity {
                     myPlayer = null;
                     playBtn.setEnabled(true);
                     stopPlayBtn.setEnabled(false);
-                    text.setText("Recording Point: Stop playing");
+                    //text.setText("Recording Point: Stop playing");
 
                     Toast.makeText(getApplicationContext(), "Stop playing the recording...",
                             Toast.LENGTH_SHORT).show();

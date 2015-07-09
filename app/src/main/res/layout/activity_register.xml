@@ -72,7 +72,7 @@
         />
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_register"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_mail"
@@ -83,16 +83,18 @@
         android:background="#ea4c88"
         android:textColor="@color/white"
         android:text="Register" />
+
     <TextView
         android:id="@+id/tv_error"
         android:layout_width="400dip"
         android:layout_height="100dip"
         android:textSize="7pt"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/btn_login"
+        android:layout_below="@id/btn_register"
         android:layout_marginRight="9dip"
         android:layout_marginTop="15dip"
         android:layout_marginLeft="120dip"
         android:textColor="#AA0000"
         android:text=""/>
+
 </RelativeLayout>
