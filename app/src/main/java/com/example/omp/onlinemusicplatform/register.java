@@ -1,6 +1,8 @@
 package com.example.omp.onlinemusicplatform;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.commons.codec.binary.Hex;
@@ -31,6 +34,7 @@ import java.util.ArrayList;
 
 public class register extends ActionBarActivity {
 
+    private ProgressDialog dialog = null;
     InputStream is = null;
 
     String line = null;
@@ -40,6 +44,7 @@ public class register extends ActionBarActivity {
     EditText etUn = null;
     EditText etPw = null;
     EditText etMail = null;
+    TextView txtMsg = null;
     Button btnRegister = null;
 
     String un = null;
@@ -47,7 +52,6 @@ public class register extends ActionBarActivity {
     String mail = null;
 
     Context context = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,7 @@ public class register extends ActionBarActivity {
         etPw = (EditText) findViewById(R.id.et_pw);
         etMail = (EditText) findViewById(R.id.et_mail);
         btnRegister = (Button) findViewById(R.id.btn_register);
+        txtMsg = (TextView) findViewById(R.id.txtMsg);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
 
@@ -68,6 +73,8 @@ public class register extends ActionBarActivity {
                 pw = new String(Hex.encodeHex(DigestUtils.sha(etPw.getText().toString())));
                 mail = etMail.getText().toString();
                 new insertDATA().execute("");
+                txtMsg.setText("Username Already Exist." );
+                sendMessage(arg0);
             }
         });
 
@@ -91,6 +98,7 @@ public class register extends ActionBarActivity {
                 HttpEntity entity = response.getEntity();
                 is = entity.getContent();
                 Log.i("TAG", "Connection Successful");
+
             } catch (Exception e) {
                 Log.i("TAG", e.toString());
                 //Invalid Address
@@ -115,8 +123,6 @@ public class register extends ActionBarActivity {
                 code = (json.getInt("code"));
                 if (code == 1) {
                     Log.i("msg", "Data Successfully Inserted");
-                    //Toast.makeText(getApplicationContext(), "Data Successfully Inserted", Toast.LENGTH_SHORT).show();
-
 //Data Successfully Inserted
                 } else {
 //Data Not Inserted
@@ -129,6 +135,13 @@ public class register extends ActionBarActivity {
             return null;
         }
 
+    }
+    public void sendMessage(View view) {
+        dialog = ProgressDialog.show(this, "", "Registration Completed. Redirecting to Login...", true);
+        Intent intent = new Intent(this, login.class);
+        startActivity(intent);
+
+        dialog.dismiss();
     }
 
 }

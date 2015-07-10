@@ -11,22 +11,23 @@ import com.example.omp.onlinemusicplatform.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 @SuppressLint("NewApi")
 public class login extends Activity {
     EditText un, pw;
-    TextView error;
+    TextView error, txtMsg;
     Button ok, btnReg;
     private String resp;
     private String errorMsg;
     private Dao Dao = new Dao();
-
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,12 +38,18 @@ public class login extends Activity {
         ok = (Button) findViewById(R.id.btn_login);
         error = (TextView) findViewById(R.id.tv_error);
         btnReg = (Button)findViewById(R.id.btn_toReg);
+        txtMsg = (TextView) findViewById(R.id.txtMsg);
+
+
         ok.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 /** According with the new StrictGuard policy,  running long tasks on the Main UI thread is not possible
                  So creating new thread to create and execute http operations */
+
+                txtMsg.setText("Wrong username/ password.");
+
                 String UserName = un.getText().toString();
                 String HashedPassword = new String(Hex.encodeHex(DigestUtils.sha(pw.getText().toString())));
                 try
@@ -55,6 +62,7 @@ public class login extends Activity {
                         //startActivity(launchActivity);
                     }
                 } catch (Exception e) {
+
                     e.printStackTrace();
                     errorMsg = e.getMessage();
                 }
@@ -90,6 +98,7 @@ public class login extends Activity {
 
     public void sendMessage(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("loggedInUser", un.getText().toString());
         startActivity(intent);
-    };
+    }
 }

@@ -96,5 +96,16 @@
         android:layout_marginLeft="120dip"
         android:textColor="#AA0000"
         android:text=""/>
+    <TextView
+        android:id="@+id/txtMsg"
+        android:layout_width="400dip"
+        android:layout_height="100dip"
+        android:textSize="7pt"
+        android:lines="2"
+        android:layout_below="@id/btn_register"
+        android:layout_marginTop="15dip"
+        android:layout_marginLeft="20dip"
+        android:textColor="#fffe9b2e"
+        android:text=""/>
 
 </RelativeLayout>

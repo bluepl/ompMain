@@ -61,13 +61,14 @@ public class MainActivity extends Activity {
 
     List<DrawerItem> dataList;
     Intent i;
-
+    String loggedInUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Intent j = getIntent();
+        loggedInUser = j.getStringExtra("loggedInUser");
         // Initializing
         dataList = new ArrayList<DrawerItem>();
         mTitle = mDrawerTitle = getTitle();
@@ -77,13 +78,14 @@ public class MainActivity extends Activity {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
 
-        dataList.add(new DrawerItem("New songs", R.drawable.ic_action_group));
-        dataList.add(new DrawerItem("Record a song", R.drawable.ic_action_video));
-        dataList.add(new DrawerItem("Upload a song", R.drawable.ic_action_import_export));
-        dataList.add(new DrawerItem("Songs", R.drawable.ic_action_import_export));
-        dataList.add(new DrawerItem("Sleep Mode", R.drawable.ic_action_import_export));
-        dataList.add(new DrawerItem("Setting", R.drawable.ic_action_import_export));
-        dataList.add(new DrawerItem("Quit", R.drawable.ic_action_import_export));
+        dataList.add(new DrawerItem("Welcome, " + loggedInUser, R.drawable.ic_face_black_48dp));
+        dataList.add(new DrawerItem("LATEST UPLOADS", R.drawable.ic_disc_full_black_18dp));
+        dataList.add(new DrawerItem("RECORD SONG", R.drawable.ic_mic_none_black_18dp));
+        dataList.add(new DrawerItem("UPLOAD SONG", R.drawable.ic_file_upload_black_24dp));
+        dataList.add(new DrawerItem("CATEGORIES", R.drawable.ic_queue_music_black_18dp));
+        dataList.add(new DrawerItem("SLEEP MODE", R.drawable.ic_av_timer_black_18dp));
+        dataList.add(new DrawerItem("QUIT", R.drawable.ic_exit_to_app_black_18dp));
+        dataList.add(new DrawerItem("SETTINGS", R.drawable.ic_settings_black_18dp));
 
         adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item, dataList);
 
@@ -101,24 +103,30 @@ public class MainActivity extends Activity {
             case 0:
 
                 break;
+            case 1:
+
+                break;
 
             //Record a Song
-            case 1:
+            case 2:
                 i = new Intent(getApplicationContext(), AudioCaptureActivity.class);
+                i.putExtra("loggedInUser", loggedInUser);
                 startActivity(i);
                 break;
             //Upload a song
-            case 2:
+            case 3:
                 i = new Intent(getApplicationContext(), UploadToServer.class);
+                i.putExtra("loggedInUser", loggedInUser);
                 startActivity(i);
                 break;
             //My Playlist
-            case 3:
+            case 4:
                 i = new Intent(getApplicationContext(), AlbumsActivity.class);
+                i.putExtra("loggedInUser", loggedInUser);
                 startActivity(i);
                 break;
             //Sleep Mode
-            case 4:
+            case 5:
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
                 alert.setTitle("Sleep Mode");
@@ -152,14 +160,6 @@ public class MainActivity extends Activity {
                 alert.show();
 
                 break;
-            //Setting
-            case 5:
-                //fragment = new FragmentThree();
-                //args.putString(FragmentThree.ITEM_NAME, dataList.get(position)
-                //        .getItemName());
-                //args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(position)
-                //        .getImgResID());
-                break;
             //Quit
             case 6:
                 Intent intent = new Intent(this, login.class);
@@ -170,6 +170,14 @@ public class MainActivity extends Activity {
 
                 //finish();
                 //System.exit(0);
+                break;
+            //Setting
+            case 7:
+                //fragment = new FragmentThree();
+                //args.putString(FragmentThree.ITEM_NAME, dataList.get(position)
+                //        .getItemName());
+                //args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(position)
+                //        .getImgResID());
                 break;
 
         }

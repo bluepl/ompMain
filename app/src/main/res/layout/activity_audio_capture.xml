@@ -9,49 +9,49 @@
     android:background="#FF4081"
     tools:context="com.example.omp.AudioCaptureActivity"
     android:id="@+id/acLayout">
-   <RelativeLayout
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/pageHead"
-       android:layout_alignParentRight="true"
-       android:layout_alignParentEnd="false"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentStart="false">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pageHead"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false">
 
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:paddingTop="30dp"
-           android:gravity= "center"
-           android:id="@+id/pageTitle"
-           android:text="RECORD"
-           android:lines="2"
-           android:textStyle="bold"
-           android:textColor="#ffffff"
-           android:fontFamily="Arial"
-           android:typeface="serif"
-           android:textSize="40sp" />
-       <!--
-       <TextView
-           android:id="@+id/text1"
-           android:layout_below="@+id/pageTitle"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="10dp"
-           android:text="Recording Point: -"
-           android:textAppearance="?android:attr/textAppearanceMedium" />
-        -->
-       <ImageView
-           android:id="@+id/micImage"
-           android:layout_width="60dp"
-           android:layout_height="60dp"
-           android:layout_below="@+id/pageTitle"
-           android:layout_centerHorizontal="true"
-           android:layout_marginTop="40dp"
-           android:layout_marginBottom="40dp"
-           android:src="@drawable/ic_keyboard_voice_black_18dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:gravity= "center"
+            android:id="@+id/pageTitle"
+            android:text="RECORD"
+            android:lines="2"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:fontFamily="Arial"
+            android:typeface="serif"
+            android:textSize="40sp" />
+        <!--
+        <TextView
+            android:id="@+id/text1"
+            android:layout_below="@+id/pageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Recording Point: -"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+         -->
+        <ImageView
+            android:id="@+id/micImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/pageTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:src="@drawable/ic_keyboard_voice_black_18dp" />
 
-   </RelativeLayout>
+    </RelativeLayout>
 
 
 

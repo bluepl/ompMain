@@ -104,12 +104,17 @@ public class TrackListActivity extends ListActivity {
                 // both album id and song is needed
                 String song_url = ((TextView) view.findViewById(R.id.song_url)).getText().toString();
                 String song_id = ((TextView) view.findViewById(R.id.song_id)).getText().toString();
-
+                String song_name = ((TextView) view.findViewById(R.id.album_name)).getText().toString();
+                String song_faves = ((TextView) view.findViewById(R.id.songs_count)).getText().toString();
+                String song_artist = ((TextView) view.findViewById(R.id.artist)).getText().toString();
                 Toast.makeText(getApplicationContext(), "Song Id: " + song_id  + ", Song Url: " + song_url, Toast.LENGTH_SHORT).show();
 
                 i.putExtra("album_id", album_id);
                 i.putExtra("song_url", song_url);
                 i.putExtra("song_id", song_id);
+                i.putExtra("song_name", song_name);
+                i.putExtra("song_faves", song_faves);
+                i.putExtra("song_artist", song_artist);
 
                 startActivity(i);
             }
@@ -171,8 +176,8 @@ public class TrackListActivity extends ListActivity {
                             // track no - increment i value
                             String track_no = String.valueOf(i + 1);
                             String name = c.getString("name");
-                            String duration = c.getString("updated_at");
-
+                            String faves = c.getString("faves");
+                            String artist = c.getString("created_by");
                             // creating new HashMap
                             HashMap<String, String> map = new HashMap<String, String>();
 
@@ -182,7 +187,8 @@ public class TrackListActivity extends ListActivity {
                             map.put("song_url", song_url);
                             map.put("track_no", track_no + ".");
                             map.put(TAG_NAME, name);
-                            map.put(TAG_DURATION, duration);
+                            map.put("artist", artist);
+                            map.put("faves", faves);
 
                             // adding HashList to ArrayList
                             tracksList.add(map);
@@ -214,8 +220,8 @@ public class TrackListActivity extends ListActivity {
                     ListAdapter adapter = new SimpleAdapter(
                             TrackListActivity.this, tracksList,
                             R.layout.list_item_tracks, new String[] { "album_id", "song_id", "song_url", "track_no",
-                            TAG_NAME, TAG_DURATION }, new int[] {
-                            R.id.album_id, R.id.song_id, R.id.song_url, R.id.track_no, R.id.album_name, R.id.song_duration });
+                            TAG_NAME, "faves", "artist"}, new int[] {
+                            R.id.album_id, R.id.song_id, R.id.song_url, R.id.track_no, R.id.album_name, R.id.songs_count, R.id.artist });
                     // updating listview
                     setListAdapter(adapter);
 

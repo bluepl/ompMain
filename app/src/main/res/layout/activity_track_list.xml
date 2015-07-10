@@ -3,7 +3,21 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="#ffffff">
+    android:background="#10000000">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:gravity= "center"
+        android:id="@+id/pageTitle"
+        android:text="TRACKS"
+        android:lines="2"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="40sp" />
 
     <ListView
         android:id="@android:id/list"
@@ -12,5 +26,6 @@
         android:divider="#b5b5b5"
         android:dividerHeight="1dp"
         android:cacheColorHint="#00000000"/>
+
 
 </LinearLayout>

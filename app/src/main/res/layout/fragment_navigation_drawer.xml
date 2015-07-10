@@ -9,7 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true"
+        android:background="#303F9F"
+        android:divider="#B2EBF2"
+        android:dividerHeight="1dp"
+        android:alpha="255">
     </ListView>
 
 </RelativeLayout>

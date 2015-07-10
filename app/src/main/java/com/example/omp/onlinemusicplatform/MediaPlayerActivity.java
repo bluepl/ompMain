@@ -1,30 +1,52 @@
 package com.example.omp.onlinemusicplatform;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class MediaPlayerActivity extends Activity {
 
     static MediaPlayer mediaPlayer;
-    public TextView songName, duration;
+    public TextView songName, duration, songArtist;
     private double timeElapsed = 0, finalTime = 0;
     private int forwardTime = 2000, backwardTime = 2000;
     private Handler durationHandler = new Handler();
+    private ImageButton btn_addLikes;
     private SeekBar seekbar;
-    String shortUrl, url;
+    String shortUrl, url, song_id, song_name, song_faves, song_artist;
     String urlHead = "http://rifeinblu.com/AndroidFileUpload/uploads";
-
+    InputStream is = null;
+    String line = null;
+    String result = null;
+    int code;
+    Context context = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +54,14 @@ public class MediaPlayerActivity extends Activity {
 
         //hosannatelugu.mp3
         Intent i = getIntent();
+        song_name = i.getStringExtra("song_name");
+        song_id = i.getStringExtra("song_id");
         shortUrl = i.getStringExtra("song_url");
+        song_faves = i.getStringExtra("song_faves");
+        song_artist = i.getStringExtra("song_artist");
         url = urlHead + shortUrl;
 
+        btn_addLikes = (ImageButton) findViewById(R.id.addLikes);
         //set the layout of the Activity
         setContentView(R.layout.activity_media_player);
 
@@ -44,12 +71,14 @@ public class MediaPlayerActivity extends Activity {
 
     public void initializeViews(){
         songName = (TextView) findViewById(R.id.songName);
+        songArtist= (TextView) findViewById(R.id.songArtist);
         finalTime = 24000;
         duration = (TextView) findViewById(R.id.songDuration);
         seekbar = (SeekBar) findViewById(R.id.seekBar);
-        songName.setText("TEST");
+        songName.setText(song_name);
         seekbar.setMax((int) finalTime);
         seekbar.setClickable(false);
+        songArtist.setText(song_artist);
     }
 
     // play mp3 song
@@ -126,6 +155,62 @@ public class MediaPlayerActivity extends Activity {
             //seek to the exact second of the track
             mediaPlayer.seekTo((int) timeElapsed);
         }
+    }
+    // add likes
+    public void addLikes(View view) {
+        new insertDATA().execute("");
+    }
+
+    class insertDATA extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... arg0) {
+            ArrayList<NameValuePair> values = new ArrayList<NameValuePair>();
+
+            values.add(new BasicNameValuePair("mid", song_id));
+
+            try {
+                DefaultHttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://192.168.0.108/insertLikes.php");
+                httppost.setEntity(new UrlEncodedFormEntity(values));
+                HttpResponse response = httpclient.execute(httppost);
+                HttpEntity entity = response.getEntity();
+                is = entity.getContent();
+                Log.i("TAG", "Connection Successful");
+            } catch (Exception e) {
+                Log.i("TAG", e.toString());
+                //Invalid Address
+            }
+
+            try {
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(is, "UTF-8"), 8);
+                StringBuilder sb = new StringBuilder();
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                is.close();
+                result = sb.toString();
+                Log.i("TAG", "Result Retrieved");
+            } catch (Exception e) {
+                Log.i("TAG", e.toString());
+            }
+
+            try {
+                JSONObject json = new JSONObject(result);
+                code = (json.getInt("code"));
+                if (code == 1) {
+                    Log.i("msg", "Data Successfully Inserted");
+//Data Successfully Inserted
+                } else {
+//Data Not Inserted
+                }
+            } catch (Exception e) {
+                Log.i("TAG", e.toString());
+            }
+            return null;
+        }
+
     }
 
     protected void onDestroy() {

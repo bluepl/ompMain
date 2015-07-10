@@ -20,13 +20,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="30dp"
+        android:paddingTop="10dp"
         android:gravity= "center"
         android:id="@+id/pageTitle"
-        android:text="TRACKS"
+        android:text="CATEGORIES"
         android:lines="2"
         android:textStyle="bold"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:fontFamily="Arial"
         android:typeface="serif"
         android:textSize="40sp" />
@@ -35,8 +35,10 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:divider="#E3F2FD"
+        android:divider="#a0000000"
         android:dividerHeight="1dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:cacheColorHint="#00000000"/>
 
 </LinearLayout>

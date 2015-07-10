@@ -29,10 +29,13 @@ public class AudioCaptureActivity extends ActionBarActivity {
         //private TextView text;
         int randName;
         String audName;
+        String loggedInUser = "";
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_audio_capture);
+            Intent i = getIntent();
+            loggedInUser = i.getStringExtra("loggedInUser");
 
             randName = genRand();
             //text = (TextView) findViewById(R.id.pageTitle);
@@ -59,7 +62,7 @@ public class AudioCaptureActivity extends ActionBarActivity {
                     // both album id and song is needed
 
                     Toast.makeText(getApplicationContext(), outputFile, Toast.LENGTH_SHORT).show();
-
+                    i.putExtra("loggedInUser", loggedInUser);
                     i.putExtra("file_desc", outputFile);
                     i.putExtra("file_name", audName);
                     startActivity(i);

@@ -35,11 +35,14 @@
             android:label="MainActivity"/>
         <activity
             android:name=".TrackListActivity"
-            android:label="@string/title_activity_track_list" />
+            android:label="Tracks"
+            android:icon="@drawable/ic_queue_music_black_48dp"/>
+            <!--android:theme="@android:style/Theme.Holo.Light.DarkActionBar" -->
         <activity
             android:name=".AlbumsActivity"
-            android:label="@string/title_activity_albums"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
+            android:label="Genre"
+            android:icon="@drawable/ic_library_music_black_48dp" />
+        <!--android:theme="@android:style/Theme.Holo.Light.DarkActionBar" -->
         <activity
             android:name=".MediaPlayerActivity"
             android:label="@string/title_activity_media_player" >

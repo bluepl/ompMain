@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
     <!-- Album id / Hidden by default -->
     <TextView
@@ -22,6 +22,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:visibility="gone" />
+
 
     <!-- Track serial no -->
 
@@ -46,9 +47,45 @@
         android:paddingTop="15dip"
         android:textColor="#000000"
         android:textSize="16dip"
-        android:layout_toRightOf="@+id/track_no"/>
+        android:layout_toRightOf="@+id/track_no" />
+
+
+    <!-- Artist -->
+    <TextView
+        android:id="@+id/artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingRight="60dip"
+        android:paddingTop="20dip"
+        android:textColor="#a0555555"
+        android:textSize="12dp" />
+
+    <!--Heart Image-->
+    <ImageView
+        android:id="@+id/faves"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingRight="15dip"
+        android:paddingTop="15dip"
+        android:src="@drawable/ic_favorite_black_36dp"
+        android:tint="#64ff7288"
+        android:tintMode="add" />
+
+    <!-- Songs likes -->
+    <TextView android:id="@+id/songs_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:background="#9ed321"
+        android:paddingRight="3dip"
+        android:paddingLeft="3dip"/>
 
     <!-- Song duration -->
+    <!--
     <TextView
         android:id="@+id/song_duration"
         android:layout_width="wrap_content"
@@ -58,5 +95,7 @@
         android:paddingLeft="3dip"
         android:paddingRight="6dip"
         android:textColor="#9ed321" />
+        -->
+
 
 </RelativeLayout>

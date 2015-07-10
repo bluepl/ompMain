@@ -79,12 +79,13 @@ public class UploadToServer extends Activity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_to_server);
 
-
         uploadButton = (Button)findViewById(R.id.uploadButton);
         messageText  = (TextView)findViewById(R.id.messageText);
         btnselectpic = (Button)findViewById(R.id.button_selectpic);
         //imageview = (ImageView)findViewById(R.id.imageView_pic);
         Intent i = getIntent();
+
+        loggedInUser = i.getStringExtra("loggedInUser");
         file_desc = i.getStringExtra("file_desc");
         file_name =  i.getStringExtra("file_name");
         //file_locale =  i.getStringExtra("file_desc");
