@@ -1,29 +1,23 @@
 package com.example.omp.onlinemusicplatform;
 
-import java.util.ArrayList;
-
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
-import com.example.omp.onlinemusicplatform.R;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 
 @SuppressLint("NewApi")
 public class login extends Activity {
     EditText un, pw;
     TextView error, txtMsg;
+    boolean isAdmin;
     Button ok, btnReg;
     private String resp;
     private String errorMsg;
@@ -39,7 +33,7 @@ public class login extends Activity {
         error = (TextView) findViewById(R.id.tv_error);
         btnReg = (Button)findViewById(R.id.btn_toReg);
         txtMsg = (TextView) findViewById(R.id.txtMsg);
-
+        isAdmin = ((CheckBox) findViewById(R.id.isAdmin)).isChecked();
 
         ok.setOnClickListener(new View.OnClickListener() {
 
@@ -49,12 +43,12 @@ public class login extends Activity {
                  So creating new thread to create and execute http operations */
 
                 txtMsg.setText("Wrong username/ password.");
-
+                Boolean isAdminChecked = ((CheckBox) findViewById(R.id.isAdmin)).isChecked();
                 String UserName = un.getText().toString();
                 String HashedPassword = new String(Hex.encodeHex(DigestUtils.sha(pw.getText().toString())));
                 try
                 {
-                    if(Dao.CheckLogin(UserName,HashedPassword))
+                    if(Dao.CheckLogin(UserName,HashedPassword, isAdminChecked))
                     {
                         sendMessage(v);
                         //Login success -> redirect to the Main activity
@@ -97,8 +91,15 @@ public class login extends Activity {
     }
 
     public void sendMessage(View view) {
+        String strIsAdmin;
+        if((((CheckBox) findViewById(R.id.isAdmin)).isChecked())){
+            strIsAdmin = "1";
+        }else{
+            strIsAdmin = "0";
+        }
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("loggedInUser", un.getText().toString());
+        intent.putExtra("isAdmin",strIsAdmin);
         startActivity(intent);
     }
 }

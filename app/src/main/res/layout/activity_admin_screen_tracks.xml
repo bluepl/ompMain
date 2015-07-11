@@ -11,7 +11,7 @@
         android:paddingTop="10dp"
         android:gravity= "center"
         android:id="@+id/pageTitle"
-        android:text="TRACKS PORTAL"
+        android:text="TRACKS"
         android:lines="2"
         android:textStyle="bold"
         android:textColor="#000000"
@@ -19,11 +19,22 @@
         android:typeface="serif"
         android:textSize="40sp" />
 
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Inactived Tracks?"
+        android:id="@+id/tb_isActivate"
+        android:clickable="true"
+        android:checked="false"
+        android:buttonTint="#ffcbb57e"
+        android:enabled="true"
+        android:layout_gravity="center_horizontal" />
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:divider="#ffcbcbcb"
+        android:divider="#b5b5b5"
         android:dividerHeight="1dp"
         android:cacheColorHint="#00000000"/>
 

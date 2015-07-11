@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -38,9 +39,10 @@ public class MediaPlayerActivity extends Activity {
     private double timeElapsed = 0, finalTime = 0;
     private int forwardTime = 2000, backwardTime = 2000;
     private Handler durationHandler = new Handler();
-    private ImageButton btn_addLikes;
+    ImageButton btn_addLikes;
     private SeekBar seekbar;
-    String shortUrl, url, song_id, song_name, song_faves, song_artist;
+    private Button btn_activate;
+    String shortUrl, url, song_id, song_name, song_faves, song_artist, isAdmin;
     String urlHead = "http://rifeinblu.com/AndroidFileUpload/uploads";
     InputStream is = null;
     String line = null;
@@ -59,11 +61,19 @@ public class MediaPlayerActivity extends Activity {
         shortUrl = i.getStringExtra("song_url");
         song_faves = i.getStringExtra("song_faves");
         song_artist = i.getStringExtra("song_artist");
+        isAdmin = i.getStringExtra("isAdmin");
         url = urlHead + shortUrl;
 
-        btn_addLikes = (ImageButton) findViewById(R.id.addLikes);
+        btn_activate = (Button) findViewById(R.id.btnActivate);
+        btn_addLikes = (ImageButton) findViewById(R.id.btnAddLikes);
+
+
         //set the layout of the Activity
-        setContentView(R.layout.activity_media_player);
+        if(isAdmin.equals("1")) {
+            setContentView(R.layout.activity_admin_media_player);
+        }else{
+            setContentView(R.layout.activity_media_player);
+        }
 
         //initialize views
         initializeViews();
@@ -79,6 +89,7 @@ public class MediaPlayerActivity extends Activity {
         seekbar.setMax((int) finalTime);
         seekbar.setClickable(false);
         songArtist.setText(song_artist);
+
     }
 
     // play mp3 song
@@ -166,12 +177,17 @@ public class MediaPlayerActivity extends Activity {
         @Override
         protected String doInBackground(String... arg0) {
             ArrayList<NameValuePair> values = new ArrayList<NameValuePair>();
-
+            String query = null;
+            if(isAdmin.equals("1")){
+                query = "http://192.168.0.108/markTracks.php";
+            }else{
+                query = "http://192.168.0.108/insertLikes.php";
+            }
             values.add(new BasicNameValuePair("mid", song_id));
 
             try {
                 DefaultHttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://192.168.0.108/insertLikes.php");
+                HttpPost httppost = new HttpPost(query);
                 httppost.setEntity(new UrlEncodedFormEntity(values));
                 HttpResponse response = httpclient.execute(httppost);
                 HttpEntity entity = response.getEntity();

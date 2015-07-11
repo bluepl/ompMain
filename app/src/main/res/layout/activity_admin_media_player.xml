@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:id="@+id/container"
+    android:layout_gravity="center"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+
+    <ImageView
+        android:id="@+id/mp3Image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:padding="30dp"
+        android:src="@drawable/music"
+        android:background="#ffffff"
+        android:layout_margin="25dp" />
+
+    <TextView
+        android:id="@+id/songName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="LOADING SONGNAME.."
+        android:elevation="2dp"
+        android:textSize="18dp" />
+    <TextView
+        android:id="@+id/songArtist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="LOADING ARTIST.."
+        android:elevation="2dp"
+        android:padding="5dp"/>
+
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp" />
+
+    <TextView
+        android:id="@+id/songDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="LOADING SONG.."
+        android:elevation="2dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:paddingTop="10dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:background="#00000000">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remove Track"
+            android:id="@+id/btnActivate"
+            android:onClick="addLikes"/>
+
+        <ImageButton
+            android:id="@+id/btnAddLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:onClick="addLikes"
+            android:src="@drawable/ic_favorite_border_black_36dp"
+            android:longClickable="false"
+            android:tint="#a4ff1410"
+            android:background="#00ff4500"
+            android:adjustViewBounds="false"
+            android:tintMode="src_over"
+            android:elevation="2dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/media_rew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:onClick="rewind"
+            android:src="@android:drawable/ic_media_rew"
+            android:elevation="2dp" />
+
+        <ImageButton
+            android:id="@+id/media_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:onClick="pause"
+            android:src="@android:drawable/ic_media_pause"
+            android:elevation="2dp" />
+
+        <ImageButton
+            android:id="@+id/media_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:onClick="play"
+            android:src="@android:drawable/ic_media_play"
+            android:elevation="2dp" />
+
+        <ImageButton
+            android:id="@+id/media_ff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:onClick="forward"
+            android:src="@android:drawable/ic_media_ff"
+            android:elevation="2dp" />
+    </LinearLayout>
+
+</LinearLayout>

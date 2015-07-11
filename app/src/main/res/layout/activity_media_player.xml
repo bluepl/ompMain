@@ -56,12 +56,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="46dp"
+            android:paddingTop="10dp"
             android:gravity="right"
             android:orientation="horizontal"
             android:background="#00000000">
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remove Track"
+                android:id="@+id/btnActivate"
+                android:onClick="addLikes"
+                android:visibility="gone"/>
+
             <ImageButton
-                android:id="@+id/addLikes"
+                android:id="@+id/btnAddLikes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="14dp"

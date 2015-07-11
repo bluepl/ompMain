@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +30,7 @@ import helper.AlertDialogManager;
 import helper.ConnectionDetector;
 import helper.JSONParser;
 
-public class TrackListActivity extends ListActivity {
+public class AdminScreenTracks extends ListActivity {
     // Connection detector
     ConnectionDetector cd;
 
@@ -48,10 +50,11 @@ public class TrackListActivity extends ListActivity {
 
     // Album id
     String album_id, album_name;
+    Switch btn_tbisActivate;
 
     // tracks JSON url
     // id - should be posted as GET params to get track list (ex: id = 5)
-    private static final String URL_ALBUMS = "http://192.168.0.108/ompGetTracks.php";
+    private static final String URL_ADMIN_ALBUMS = "http://192.168.0.108/ompAdminTracks.php";
 
     // ALL JSON node names
     private static final String TAG_SONGS = "songs";
@@ -63,14 +66,23 @@ public class TrackListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track_list);
+        setContentView(R.layout.activity_admin_screen_tracks);
 
         cd = new ConnectionDetector(getApplicationContext());
+
+        btn_tbisActivate = (Switch)findViewById(R.id.tb_isActivate);
+        btn_tbisActivate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                new LoadTracks().execute();
+            }
+
+        });
 
         // Check if Internet present
         if (!cd.isConnectingToInternet()) {
             // Internet Connection is not present
-            alert.showAlertDialog(TrackListActivity.this, "Internet Connection Error",
+            alert.showAlertDialog(AdminScreenTracks.this, "Internet Connection Error",
                     "Please connect to working Internet connection", false);
             // stop executing code by return
             return;
@@ -105,7 +117,7 @@ public class TrackListActivity extends ListActivity {
                 String song_url = ((TextView) view.findViewById(R.id.song_url)).getText().toString();
                 String song_id = ((TextView) view.findViewById(R.id.song_id)).getText().toString();
                 String song_name = ((TextView) view.findViewById(R.id.album_name)).getText().toString();
-                String song_faves = ((TextView) view.findViewById(R.id.songs_count)).getText().toString();
+                String song_active = ((TextView) view.findViewById(R.id.tv_isActivated)).getText().toString();
                 String song_artist = ((TextView) view.findViewById(R.id.artist)).getText().toString();
                 Toast.makeText(getApplicationContext(), "Song Id: " + song_id  + ", Song Url: " + song_url, Toast.LENGTH_SHORT).show();
 
@@ -113,9 +125,9 @@ public class TrackListActivity extends ListActivity {
                 i.putExtra("song_url", song_url);
                 i.putExtra("song_id", song_id);
                 i.putExtra("song_name", song_name);
-                i.putExtra("song_faves", song_faves);
+                i.putExtra("song_faves", song_active);
                 i.putExtra("song_artist", song_artist);
-                i.putExtra("isAdmin", "0");
+                i.putExtra("isAdmin", "1");
 
                 startActivity(i);
             }
@@ -134,7 +146,7 @@ public class TrackListActivity extends ListActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(TrackListActivity.this);
+            pDialog = new ProgressDialog(AdminScreenTracks.this);
             pDialog.setMessage("Loading songs ...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
@@ -146,17 +158,24 @@ public class TrackListActivity extends ListActivity {
          * */
         protected String doInBackground(String... args) {
             // Building Parameters
+
+            String strIsActivated = "1";
+            if((((Switch) findViewById(R.id.tb_isActivate)).isChecked())) {
+                strIsActivated = "0";
+            }
+
             List<NameValuePair> params = new ArrayList<NameValuePair>();
 
             // post album id as GET parameter
-            params.add(new BasicNameValuePair("album_id", album_id));
-
+            params.add(new BasicNameValuePair("IsActivated", strIsActivated));
             // getting JSON string from URL
-            String json = jsonParser.makeHttpRequest(URL_ALBUMS, "GET",
+            String json = jsonParser.makeHttpRequest(URL_ADMIN_ALBUMS, "GET",
                     params);
 
             // Check your log cat for JSON reponse
             Log.d("Track List JSON: ", json);
+
+            tracksList.clear();
 
             try {
                 JSONObject jObj = new JSONObject(json);
@@ -177,7 +196,7 @@ public class TrackListActivity extends ListActivity {
                             // track no - increment i value
                             String track_no = String.valueOf(i + 1);
                             String name = c.getString("name");
-                            String faves = c.getString("faves");
+                            String isActivated = c.getString("IsActivated");
                             String artist = c.getString("created_by");
                             // creating new HashMap
                             HashMap<String, String> map = new HashMap<String, String>();
@@ -189,9 +208,10 @@ public class TrackListActivity extends ListActivity {
                             map.put("track_no", track_no + ".");
                             map.put(TAG_NAME, name);
                             map.put("artist", artist);
-                            map.put("faves", faves);
+                            map.put("song_active", isActivated);
 
                             // adding HashList to ArrayList
+
                             tracksList.add(map);
                         }
                     } else {
@@ -219,10 +239,10 @@ public class TrackListActivity extends ListActivity {
                      * Updating parsed JSON data into ListView
                      * */
                     ListAdapter adapter = new SimpleAdapter(
-                            TrackListActivity.this, tracksList,
-                            R.layout.list_item_tracks, new String[] { "album_id", "song_id", "song_url", "track_no",
-                            TAG_NAME, "faves", "artist"}, new int[] {
-                            R.id.album_id, R.id.song_id, R.id.song_url, R.id.track_no, R.id.album_name, R.id.songs_count, R.id.artist });
+                            AdminScreenTracks.this, tracksList,
+                            R.layout.list_item_admin_tracks, new String[] { "album_id", "song_id", "song_url", "track_no",
+                            TAG_NAME, "song_active", "artist"}, new int[] {
+                            R.id.album_id, R.id.song_id, R.id.song_url, R.id.track_no, R.id.album_name, R.id.tv_isActivated, R.id.artist });
                     // updating listview
                     setListAdapter(adapter);
 

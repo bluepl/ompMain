@@ -31,18 +31,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:label="MainActivity"/>
+        <activity
+            android:name=".MainActivity"
+            android:label="MainActivity" />
         <activity
             android:name=".TrackListActivity"
-            android:label="Tracks"
-            android:icon="@drawable/ic_queue_music_black_48dp"/>
-            <!--android:theme="@android:style/Theme.Holo.Light.DarkActionBar" -->
+            android:icon="@drawable/ic_queue_music_black_48dp"
+            android:label="Tracks" />
+        <!-- android:theme="@android:style/Theme.Holo.Light.DarkActionBar" -->
         <activity
             android:name=".AlbumsActivity"
-            android:label="Genre"
-            android:icon="@drawable/ic_library_music_black_48dp" />
-        <!--android:theme="@android:style/Theme.Holo.Light.DarkActionBar" -->
+            android:icon="@drawable/ic_library_music_black_48dp"
+            android:label="Genre" />
+        <!-- android:theme="@android:style/Theme.Holo.Light.DarkActionBar" -->
         <activity
             android:name=".MediaPlayerActivity"
             android:label="@string/title_activity_media_player" >
@@ -62,6 +63,10 @@
         <activity
             android:name=".register"
             android:label="@string/title_activity_register" >
+        </activity>
+        <activity
+            android:name=".AdminScreenTracks"
+            android:label="@string/title_activity_admin_screen_tracks" >
         </activity>
     </application>
 

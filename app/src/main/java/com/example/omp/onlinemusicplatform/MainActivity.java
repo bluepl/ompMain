@@ -1,53 +1,23 @@
 package com.example.omp.onlinemusicplatform;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.text.Editable;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import net.sourceforge.jtds.jdbc.Driver;
-
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import android.support.v4.app.FragmentActivity;
-import android.widget.Toast;
-
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.http.client.HttpClient;
 
 
 public class MainActivity extends Activity {
@@ -62,6 +32,7 @@ public class MainActivity extends Activity {
     List<DrawerItem> dataList;
     Intent i;
     String loggedInUser;
+    String isAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +40,8 @@ public class MainActivity extends Activity {
 
         Intent j = getIntent();
         loggedInUser = j.getStringExtra("loggedInUser");
+        isAdmin = j.getStringExtra("isAdmin");
+
         // Initializing
         dataList = new ArrayList<DrawerItem>();
         mTitle = mDrawerTitle = getTitle();
@@ -78,14 +51,17 @@ public class MainActivity extends Activity {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
 
-        dataList.add(new DrawerItem("Welcome, " + loggedInUser, R.drawable.ic_face_black_48dp));
-        dataList.add(new DrawerItem("LATEST UPLOADS", R.drawable.ic_disc_full_black_18dp));
-        dataList.add(new DrawerItem("RECORD SONG", R.drawable.ic_mic_none_black_18dp));
-        dataList.add(new DrawerItem("UPLOAD SONG", R.drawable.ic_file_upload_black_24dp));
-        dataList.add(new DrawerItem("CATEGORIES", R.drawable.ic_queue_music_black_18dp));
-        dataList.add(new DrawerItem("SLEEP MODE", R.drawable.ic_av_timer_black_18dp));
-        dataList.add(new DrawerItem("QUIT", R.drawable.ic_exit_to_app_black_18dp));
-        dataList.add(new DrawerItem("SETTINGS", R.drawable.ic_settings_black_18dp));
+
+            dataList.add(new DrawerItem("Welcome, " + loggedInUser, R.drawable.ic_face_black_48dp));
+            dataList.add(new DrawerItem("LATEST UPLOADS", R.drawable.ic_disc_full_black_18dp));
+            dataList.add(new DrawerItem("RECORD SONG", R.drawable.ic_mic_none_black_18dp));
+            dataList.add(new DrawerItem("UPLOAD SONG", R.drawable.ic_file_upload_black_24dp));
+            dataList.add(new DrawerItem("CATEGORIES", R.drawable.ic_queue_music_black_18dp));
+            dataList.add(new DrawerItem("SLEEP MODE", R.drawable.ic_av_timer_black_18dp));
+            dataList.add(new DrawerItem("QUIT", R.drawable.ic_exit_to_app_black_18dp));
+            if(isAdmin .equals("1")) {
+                dataList.add(new DrawerItem("PORTAL", R.drawable.ic_settings_black_18dp));
+        }
 
         adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item, dataList);
 
@@ -173,13 +149,14 @@ public class MainActivity extends Activity {
                 break;
             //Setting
             case 7:
-                //fragment = new FragmentThree();
-                //args.putString(FragmentThree.ITEM_NAME, dataList.get(position)
-                //        .getItemName());
-                //args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(position)
-                //        .getImgResID());
-                break;
-
+                if(isAdmin.equals("1")) {
+                    i = new Intent(getApplicationContext(), AdminScreenTracks.class);
+                    i.putExtra("loggedInUser", loggedInUser);
+                    startActivity(i);
+                    break;
+                }else {
+                    break;
+                }
         }
 /*
         fragment.setArguments(args);
