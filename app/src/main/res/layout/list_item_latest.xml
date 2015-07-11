@@ -1,0 +1,120 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/feed_item_profile_info_padd"
+    android:paddingBottom="@dimen/feed_item_padding_top_bottom"
+    android:paddingTop="@dimen/feed_item_padding_top_bottom">
+
+    <!-- Album id / Hidden by default -->
+    <TextView
+        android:id="@+id/album_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/feed_item_profile_name"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
+    <!-- Song id -->
+    <TextView
+        android:id="@+id/song_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dip"
+        android:paddingLeft="5dip"
+        android:paddingTop="15dip"
+        android:textColor="#000000"
+        android:textSize="16dip"
+        android:visibility="gone"/>
+
+    <!-- Song Name -->
+    <TextView
+        android:id="@+id/song_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dip"
+        android:paddingLeft="5dip"
+        android:paddingTop="15dip"
+        android:textColor="#000000"
+        android:textSize="@dimen/feed_item_profile_name"
+        android:textStyle="bold" />
+
+    <!-- Created At -->
+    <TextView
+        android:id="@+id/song_created_at"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dip"
+        android:textColor="@color/timestamp"
+        android:textSize="@dimen/feed_item_timestamp"
+        android:layout_below="@+id/song_name"/>
+
+    <!-- Song url / Hidden by default -->
+    <TextView
+        android:id="@+id/song_url"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+
+    <!-- Track serial no -->
+
+    <TextView
+        android:id="@+id/track_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dip"
+        android:paddingLeft="5dip"
+        android:paddingTop="15dip"
+        android:textColor="#000000"
+        android:textSize="16dip"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone"/>
+    <!-- Artist -->
+    <TextView
+        android:id="@+id/artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dip"
+        android:textColor="#a0555555"
+        android:textSize="12dp"
+        android:layout_below="@id/song_created_at"
+        android:textStyle="bold"
+        android:textColorLink="@color/link" />
+    <!--Heart Image-->
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingRight="25dip"
+        android:src="@drawable/ic_face_black_48dp"
+        android:tint="#64ff7288"
+        android:tintMode="add"
+        android:layout_centerVertical="true" />
+
+
+    <!-- Is Song Active
+    <TextView android:id="@+id/tv_isActivated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:background="#9ed321"
+        android:paddingRight="3dip"
+        android:paddingLeft="3dip"/>
+    -->
+
+    <!-- Song duration -->
+    <!--
+    <TextView
+        android:id="@+id/song_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="3dip"
+        android:paddingRight="6dip"
+        android:textColor="#9ed321" />
+        -->
+</RelativeLayout>

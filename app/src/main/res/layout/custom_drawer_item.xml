@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#E0F7FA">
+    android:background="#a0dfdfdf">
 
 
     <LinearLayout
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="0dp"
-        android:background="#E0F7FA"
+        android:background="#a0dfdfdf"
         >
 
         <LinearLayout
@@ -25,23 +25,25 @@
             <ImageView
                 android:id="@+id/drawer_icon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
 
-                />
+                android:layout_gravity="center_vertical" />
 
             <TextView
                 android:id="@+id/drawer_itemName"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:lines="2"
+                android:layout_height="fill_parent"
                 android:textStyle="bold"
                 android:textColor="#000000"
-                android:fontFamily="Roboto-Condensed"
+                android:fontFamily="sans-serif"
                 android:typeface="serif"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:orientation="vertical"
                 android:layout_gravity="center_vertical"
-                />
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="0dp"
+                android:focusable="false"
+                android:nestedScrollingEnabled="false" />
         </LinearLayout>
 
         <View

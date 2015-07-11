@@ -68,6 +68,10 @@
             android:name=".AdminScreenTracks"
             android:label="@string/title_activity_admin_screen_tracks" >
         </activity>
+        <activity
+            android:name=".testFeed"
+            android:label="@string/title_activity_test_feed" >
+        </activity>
     </application>
 
 </manifest>
